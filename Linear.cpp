@@ -58,7 +58,7 @@ int main(){
         printf("w %f b %f \n", w, b);
     }
     printf("-------------------------------- \n");
-    printf("final solution: %f \n", w + b);
+    printf("final : %f \n", w + b);
      
 
 
