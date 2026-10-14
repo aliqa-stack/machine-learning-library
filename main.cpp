@@ -14,5 +14,7 @@ int main(){
     };
     std::vector<double> y = {2,4,6,8,9};
     std::cout<<Search_Slp(y, x) <<"\n";
-    std::cout<<"theprediction is: "<< Predc(x, y, 0.5, 0.5)<<"\n";
+    std::cout<<"theprediction is: "<< Predc(x, y)<<"\n";
+    double y_predict = Predc(x, y);
+    std::cout<<MSE(y_predict, y);
 }
