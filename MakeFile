@@ -1,0 +1,15 @@
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra
+
+.PHONY: all run clean
+
+all: main
+
+main: main.cpp mainalgorithm.cpp algoritma.h
+	$(CXX) $(CXXFLAGS) main.cpp mainalgorithm.cpp -o main
+
+run: main
+	./main
+
+clean:
+	rm -f main

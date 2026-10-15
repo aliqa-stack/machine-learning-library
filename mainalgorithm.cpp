@@ -9,13 +9,13 @@
 */
 
 
-double Predc(std::vector<std::vector<double>>& x,std::vector<double>& y){
+double Predc(std::vector<std::vector<double>>& x,std::vector<double>& y, double& w){
     if(x.empty() || y.empty()){
         std::cerr<<"the parameters is empty please fill it \n";
 
         return 1;
     }
-    double w = 0.0;
+    //INTERCEPT STATIS TIDAK DINAMIS!!
     double b = 0.0;
     double predict_value = 0.0;
 
