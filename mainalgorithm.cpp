@@ -1,5 +1,4 @@
 #include "algoritma.h"
-#include <thread>
 #include <iostream>
 #include <vector>
 
