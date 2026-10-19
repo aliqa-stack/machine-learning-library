@@ -7,85 +7,33 @@
 
 */
 
+Model::Model(){
+    learning_rate = 0.001;
+    w = 0.5;
+    b = 0.5;
+}
 
-double Predc(std::vector<std::vector<double>>& x,std::vector<double>& y, double& w){
-    if(x.empty() || y.empty()){
-        std::cerr<<"the parameters is empty please fill it \n";
 
-        return 1;
-    }
-    //INTERCEPT STATIS TIDAK DINAMIS!!
-    double b = 0.0;
-    double predict_value = 0.0;
+double Model::Predc(int epoch, const size_t Sizesample ,const std::vector<std::vector<double>>& x, const std::vector<double>& y, double &w){
+for(int j = 0 ; j < epoch; j++){
+    double error =0;
 
-    double loss =0;
-    const size_t n = y.size();
-    for(size_t i =0; i < n; i++){
-        predict_value = w*x[i][0] +b;
-        double error = predict_value - y[i];
-        loss += error * error;
+    for(size_t i = 0; i < Sizesample; i++){
+        double y_pred = (w * x[i][0]) + b;
+        double loss = y_pred - y[i];
+         error += std::pow(loss, 2);
+         
+         gw += loss * x[i][0];
+         db += loss;
+         
+        }
         
-    }
-
-    return predict_value;
+        gw = (2.0 / Sizesample) * gw;
+        w = w - (learning_rate * gw);
+        b = b - (learning_rate * db);
+        mse = error / Sizesample;
 }
 
-/*
-function for searching weight and slope 
-dynamic weight and slope 
-*/
-double Search_Slp(std::vector<double> &y, std::vector<std::vector<double>>& x){
-    double sumY = 0.0;
-    double sumX = 0.0;
-    double sumXX = 0.0;
-    double sumXY = 0.0;
-    double w = 0.0;
-    for(size_t i = 0; i < y.size(); i++){
-        sumY += y[i];
-        sumX += x[i][0]; 
-        sumXX += sumX * sumX;
-        sumXY += sumX * sumY;
-
-
-    }
-    w = ( y.size() * sumXY - sumX * sumY) / (y.size() * sumXX - sumX * sumX);
-
-    return w;
+return mse;
 }
-
-double Search_Intc(std::vector<double>& y, std::vector<std::vector<double>>& x){
-    double sumY = 0.0;
-    double sumX = 0.0;
-    double sumXX = 0.0;
-    double sumXY = 0.0;
-    double b = 0.0;
-    for(size_t i = 0; i < y.size(); i++){
-        sumY += y[i];
-        sumX += x[i][0]; 
-        sumXX += sumX * sumX;
-        sumXY += sumX * sumY;
-
-
-    }
-    double w = Search_Intc(y, x);
-
-    b  = (sumY - w * sumX) / y.size();
-
-    return b;
-}
-
-//Mean Squared Error 
-double MSE(double pred_y, std::vector<double>& y){
-    int n = y.size();
-    double error = 0.0;
-    for(size_t i = 0 ; i < n; i++){
-         error += pred_y - y[i];
-
-    }
-    double total_loss = error * error;
-    double mean = total_loss / n;
-    return mean; 
-}
-
-
 
