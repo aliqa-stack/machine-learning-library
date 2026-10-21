@@ -7,11 +7,7 @@
 
 */
 
-Model::Model(){
-    learning_rate = 0.001;
-    w = 0.5;
-    b = 0.5;
-}
+
 
 
 double Model::mean(int Sizesample, std::vector<double>& y){
@@ -28,14 +24,15 @@ double Model::mean(int Sizesample, std::vector<double>& y){
 }
 
 
-double Model::Predc(int epoch, const size_t Sizesample ,const std::vector<std::vector<double>>& x,  std::vector<double>& y, double &w){
+double Model::Predc(int epoch, const size_t Sizesample ,const std::vector<std::vector<double>>& x,  std::vector<double>& y){
     double barof_y = mean(Sizesample, y);
 for(int j = 0 ; j < epoch; j++){
     double error =0;
     double error2=0;
 
     for(size_t i = 0; i < Sizesample; i++){
-        double y_pred = (w * x[i][0]) + b;
+        //double y_pred = (w * x[i][0]) + b;
+        double y_pred = predict(x[i][0]);
         double loss = y_pred - barof_y;
         double ssr = y_pred - y[i];
          error2 += std::pow(loss, 2);
@@ -52,11 +49,16 @@ for(int j = 0 ; j < epoch; j++){
        db  = (2.0 / Sizesample) * db;
         w = w - (learning_rate * gw);
         b = b - (learning_rate * db);
-        gw = 0;
-        db = 0;
+
+        
         mse = error / Sizesample;
 }
 
 return mse;
+}
+
+double  Model::predict(double x){
+ 
+    return (w * x) + b;
 }
 

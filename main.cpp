@@ -17,8 +17,8 @@ int main(){
     double w = 0.5;
 
     Model linear;
-    for(int i = 0; i < 100; i++){
-         double mse = linear.Predc(1, Sizesample, x, y, w);
+    for(int i = 0; i < 200; i++){
+         double mse = linear.Predc(1, Sizesample, x, y);
          std::cout<<"the mse is : "<<mse<<"\n";
      }
     
