@@ -6,7 +6,7 @@
 int main(){
     std::vector<std::vector<double>> x = {
         {2,1},
-        {3,1},
+        {3,2},
         {5,2},
         {6,4},
         {8,5},

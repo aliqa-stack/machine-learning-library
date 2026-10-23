@@ -62,3 +62,20 @@ double  Model::predict(double x){
     return (w * x) + b;
 }
 
+double Model::Search_Intc(std::vector<double>&y, std::vector<std::vector<double>>& x){
+    double intercept = 0;
+    
+  for(size_t i = 0; i < y.size(); i++){
+    double x_value = x[i][0];
+    double sumX = x_value;
+    double sumY = y[i];
+    double sumXY = sumX * sumY;
+    double sumXX = std::pow(sumX, 2);
+
+    intercept = ( n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+
+  }
+
+
+  return intercept;
+}
