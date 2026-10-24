@@ -14,7 +14,7 @@ make -f MakeFile run
 g++ //
 ```
 # File utama
--'algoritma.h' //headers file
--'mainalgorithm.cpp' //tempat fungsi utama
--'main.cpp' //file untuk menjalankan kode dari mainalgorithm.cpp
--'Linear.cpp' //demo rumus dari linear algebra
+- `algoritma.h` //headers file
+- `mainalgorithm.cpp` //tempat fungsi utama
+- `main.cpp` //file untuk menjalankan kode dari mainalgorithm.cpp
+- `Linear.cpp` //demo rumus dari linear algebra
