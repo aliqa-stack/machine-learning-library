@@ -1,4 +1,4 @@
-#include "algoritma.h"
+#include "../headers/algoritma.h"
 #include <iostream>
 #include <vector>
 
@@ -64,13 +64,18 @@ double  Model::predict(double x){
 
 double Model::Search_Intc(std::vector<double>&y, std::vector<std::vector<double>>& x){
     double intercept = 0;
+    int n = y.size();
+    double sumX = 0;
+    double sumY = 0;
+    double sumXY = 0;
+    double sumXX = 0;
     
   for(size_t i = 0; i < y.size(); i++){
     double x_value = x[i][0];
-    double sumX = x_value;
-    double sumY = y[i];
-    double sumXY = sumX * sumY;
-    double sumXX = std::pow(sumX, 2);
+     sumX += x_value;
+     sumY += y[i];
+     sumXY += sumX * sumY;
+     sumXX += std::pow(sumX, 2);
 
     intercept = ( n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
 
@@ -78,4 +83,38 @@ double Model::Search_Intc(std::vector<double>&y, std::vector<std::vector<double>
 
 
   return intercept;
+}
+
+std::vector<std::vector<double>> Model::openData(const std::string& fileName){
+    
+    std::ifstream file(fileName);
+    std::vector<std::vector<double>> data;
+
+    if(!file.is_open()){
+        std::cerr<<"gagal membuka file csv \n";
+        return data;
+    }
+
+    std::string line;
+    std::getline( file, line);
+    while(std::getline(file, line)){
+        std::stringstream ss(line);
+        std::string value;
+
+        std::vector<double> row;
+
+        while(std::getline(ss, value, ',')){
+            row.push_back(std::stod(value));
+        }
+
+        if(row.size() < 3 ){
+            std::cerr<<"format csv tidak valid!! \n";
+            continue;
+        }
+        data.push_back(row);
+
+        
+    }
+    return data;
+
 }

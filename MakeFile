@@ -1,12 +1,12 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra
+CXXFLAGS = -Iheaders -std=c++17 -Wall -Wextra
 
 .PHONY: all run clean
 
 all: main
 
-main: main.cpp mainalgorithm.cpp algoritma.h
-	$(CXX) $(CXXFLAGS) main.cpp mainalgorithm.cpp -o main
+main: main.cpp src/algorithmTrain.cpp headers/algoritma.h
+	$(CXX) $(CXXFLAGS) main.cpp src/algorithmTrain.cpp -o main
 
 run: main
 	./main
