@@ -85,6 +85,21 @@ double Model::Search_Intc(std::vector<double>&y, std::vector<std::vector<double>
   return intercept;
 }
 
+#if defined(ERROR_MEAN)
+    double MSE(double pred_y, std::vector<double>& y){
+        size_t n = y.size();
+        double SY = 0;
+        for(size_t i = 0; i < n; i++){
+            SY = y[i];
+        }
+        double totalErr = pred_y - SY;
+        double error = std::pow(totalErr, 2); 
+        double mse = error / n;
+
+        return mse;
+    }
+#endif //mse
+
 std::vector<std::vector<double>> Model::openData(const std::string& fileName){
     
     std::ifstream file(fileName);
@@ -116,5 +131,22 @@ std::vector<std::vector<double>> Model::openData(const std::string& fileName){
         
     }
     return data;
+
+}
+
+
+std::vector<int> Model::CreateInt_Torch(int count, int from, int until){
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    std::uniform_int_distribution<> distrib(from, until);
+
+    std::vector<int> array;
+
+    for(int i = 0; i < count;i++){
+        array.push_back(distrib(gen));
+    }
+
+    return array;
 
 }

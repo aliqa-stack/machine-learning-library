@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <random>
 
 
 //double Predc(std::vector<std::vector<double>>& x,std::vector<double>& y, double& w);
@@ -27,11 +28,12 @@ class Model{
     double  mean(int Sizesample, std::vector<double>& y);
     double Predc(int epoch, const std::size_t Sizesample, const std::vector<std::vector<double>>& x,  std::vector<double>& y);
     double Search_Intc(std::vector<double>&y, std::vector<std::vector<double>>& x);
-    // #if defined(ERROR_MEAN)
-    //     double MSE(double pred_y, std::vector<double>& y);
-    // #endif //mse        
+     #if defined(ERROR_MEAN)
+         double MSE(double pred_y, std::vector<double>& y);
+     #endif //mse        
     double predict(double x);
     std::vector<std::vector<double>> openData(const std::string& fileName);
+    std::vector<int> CreateInt_Torch(int count, int from, int until);
 };
 
 

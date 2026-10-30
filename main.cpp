@@ -20,9 +20,13 @@ int main(){
     }
 
     const double mse = linear.Predc(200, y.size(), x, y);
-    std::cout << "Training MSE: " << mse << '\n';
+    //std::cout << "Training MSE: " << mse << '\n';
+    const std::vector<int> test = linear.CreateInt_Torch(10, 1, 10);
+    for(auto& i : test){
+        std::cout<<i<<"\n";
+    }
 
-    const double newX1 = 8.0;
+    const double newX1 = 4.0;
     std::cout << "Prediction for x1 = " << newX1 << ": "
               << linear.predict(newX1) << '\n';
 
