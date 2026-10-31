@@ -5,8 +5,8 @@ CXXFLAGS = -Iheaders -std=c++17 -Wall -Wextra
 
 all: main
 
-main: main.cpp src/algorithmTrain.cpp headers/algoritma.h
-	$(CXX) $(CXXFLAGS) main.cpp src/algorithmTrain.cpp -o main
+main: main.cpp src/algorithmTrain.cpp src/MeanSquared.cpp headers/algoritma.h headers/Mean.h
+	$(CXX) $(CXXFLAGS) main.cpp src/algorithmTrain.cpp src/MeanSquared.cpp -o main
 
 run: main
 	./main
